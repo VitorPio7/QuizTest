@@ -75,6 +75,7 @@ export default function App() {
         </form>
         <button onClick={myNextQuestion}>next</button>
         {nextQuestion > 0 && <button onClick={myBeforeQuestion}>before</button>}
+        {isTrue.tag}
       </>
     );
   }
