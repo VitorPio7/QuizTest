@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+import he from "he";
+import MyFormComponent from "./component/MyFormComponent";
+import Correct from "./component/Correct";
 
 export default function App() {
   const [myQuestions, setMyQuestions] = useState([]);
@@ -7,23 +11,20 @@ export default function App() {
   const [isTrue, setisTrue] = useState({
     condition: false,
     tag: null,
+    correct: 0,
   });
 
-  console.log(myQuestions);
-
   useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=2")
-      .then((response) => response.json())
-      .then((data) => {
-        const formattedQuestions = data.results?.map((el) => ({
-          question: el.question,
-          options: [...el.incorrect_answers, el.correct_answer].sort(
-            () => Math.random() - 0.5
-          ),
-          correctAnswer: el.correct_answer,
-        }));
-        setMyQuestions(formattedQuestions);
-      });
+    axios.get("https://opentdb.com/api.php?amount=10").then((response) => {
+      const formattedQuestions = response.data.results?.map((el) => ({
+        question: he.decode(el.question),
+        options: [...el.incorrect_answers, el.correct_answer].sort(
+          () => Math.random() - 0.5
+        ),
+        correctAnswer: el.correct_answer,
+      }));
+      setMyQuestions(formattedQuestions);
+    });
   }, []);
   function myNextQuestion() {
     setNextQuestion((prevValue) => prevValue + 1);
@@ -48,7 +49,11 @@ export default function App() {
   function changeBoolean() {
     selectedOption === myQuestions[nextQuestion]?.correctAnswer
       ? setisTrue(() => {
-          return { condition: true, tag: <p>Correct Answer</p> };
+          return {
+            condition: true,
+            tag: <p>Correct Answer</p>,
+            correct: setisTrue((prevValue) => prevValue.correct + 1),
+          };
         })
       : setisTrue(() => {
           return { condition: false, tag: <p>Wrong Answer</p> };
@@ -56,42 +61,29 @@ export default function App() {
   }
 
   /*mudar para radio */
-  function MyComponent() {
-    if (myQuestions?.length === 0) {
-      return <p>Loading questions...</p>;
-    }
-    return (
-      <>
-        <form onSubmit={handleDropdownChange}>
-          <p>{myQuestions[nextQuestion]?.question}</p>
-          <label>
-            <select value={selectedOption} onChange={handleDropdownChange}>
-              <option value={myQuestions[nextQuestion]?.options[1]}>
-                {myQuestions[nextQuestion]?.options[1]}
-              </option>
-              <option value={myQuestions[nextQuestion]?.options[0]}>
-                {myQuestions[nextQuestion]?.options[0]}
-              </option>
-              <option value={myQuestions[nextQuestion]?.options[2]}>
-                {myQuestions[nextQuestion]?.options[2]}
-              </option>
-              <option value={myQuestions[nextQuestion]?.options[3]}>
-                {myQuestions[nextQuestion]?.options[3]}
-              </option>
-              <option value={myQuestions[nextQuestion]?.options[4]}>
-                {myQuestions[nextQuestion]?.options[4]}
-              </option>
-            </select>
-            <button type="submit" onClick={changeBoolean}>
-              Send
-            </button>
-          </label>
-        </form>
-        <button onClick={myNextQuestion}>next</button>
-        {nextQuestion > 0 && <button onClick={myBeforeQuestion}>before</button>}
-        {isTrue.tag}
-      </>
-    );
-  }
-  return <div>{MyComponent()}</div>;
+
+  return (
+    <div className="container">
+      {nextQuestion === 10 ? (
+        <Correct
+          text={`Correct answers:${isTrue.correct}`}
+          send={() => {
+            window.location.reload();
+          }}
+        >
+          Click here
+        </Correct>
+      ) : (
+        <MyFormComponent
+          myQuestions={myQuestions}
+          handleDropdownChange={handleDropdownChange}
+          nextQuestion={nextQuestion}
+          changeBoolean={changeBoolean}
+          myNextQuestion={myNextQuestion}
+          myBeforeQuestion={myBeforeQuestion}
+          isTrue={isTrue}
+        />
+      )}
+    </div>
+  );
 }
