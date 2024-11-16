@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import questions from "./questions";
 
 export default function App() {
   const [myQuestions, setMyQuestions] = useState([]);
@@ -9,11 +8,22 @@ export default function App() {
     condition: false,
     tag: null,
   });
-  console.log(selectedOption);
-  console.log(isTrue);
+
+  console.log(myQuestions);
 
   useEffect(() => {
-    setMyQuestions(questions);
+    fetch("https://opentdb.com/api.php?amount=2")
+      .then((response) => response.json())
+      .then((data) => {
+        const formattedQuestions = data.results?.map((el) => ({
+          question: el.question,
+          options: [...el.incorrect_answers, el.correct_answer].sort(
+            () => Math.random() - 0.5
+          ),
+          correctAnswer: el.correct_answer,
+        }));
+        setMyQuestions(formattedQuestions);
+      });
   }, []);
   function myNextQuestion() {
     setNextQuestion((prevValue) => prevValue + 1);
@@ -44,8 +54,12 @@ export default function App() {
           return { condition: false, tag: <p>Wrong Answer</p> };
         });
   }
+
   /*mudar para radio */
   function MyComponent() {
+    if (myQuestions?.length === 0) {
+      return <p>Loading questions...</p>;
+    }
     return (
       <>
         <form onSubmit={handleDropdownChange}>
