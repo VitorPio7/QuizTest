@@ -13,13 +13,16 @@ export default function App() {
     tag: null,
     correct: 0,
   });
+  console.log(isTrue);
 
   useEffect(() => {
     axios.get("https://opentdb.com/api.php?amount=10").then((response) => {
       const formattedQuestions = response.data.results?.map((el) => ({
         question: he.decode(el.question),
-        options: [...el.incorrect_answers, el.correct_answer].sort(
-          () => Math.random() - 0.5
+        options: he.decode(
+          [...el.incorrect_answers, el.correct_answer].sort(
+            () => Math.random() - 0.5
+          )
         ),
         correctAnswer: el.correct_answer,
       }));
@@ -28,8 +31,9 @@ export default function App() {
   }, []);
   function myNextQuestion() {
     setNextQuestion((prevValue) => prevValue + 1);
-    setisTrue(() => {
+    setisTrue((prevValue) => {
       return {
+        ...prevValue,
         condition: false,
         tag: null,
       };
@@ -37,8 +41,8 @@ export default function App() {
   }
   function myBeforeQuestion() {
     setNextQuestion((prevValue) => prevValue - 1);
-    setisTrue(() => {
-      return { condition: false, tag: null };
+    setisTrue((prevValue) => {
+      return { ...prevValue, condition: false, tag: null };
     });
   }
 
@@ -48,16 +52,17 @@ export default function App() {
   };
   function changeBoolean() {
     selectedOption === myQuestions[nextQuestion]?.correctAnswer
-      ? setisTrue(() => {
-          return {
-            condition: true,
-            tag: <p>Correct Answer</p>,
-            correct: setisTrue((prevValue) => prevValue.correct + 1),
-          };
-        })
-      : setisTrue(() => {
-          return { condition: false, tag: <p>Wrong Answer</p> };
-        });
+      ? setisTrue((prevValue) => ({
+          ...prevValue,
+          condition: true,
+          tag: <p>Correct Answer</p>,
+          correct: prevValue.correct + 1,
+        }))
+      : setisTrue((prevValue) => ({
+          ...prevValue,
+          condition: false,
+          tag: <p>Wrong Answer</p>,
+        }));
   }
 
   /*mudar para radio */
@@ -66,7 +71,8 @@ export default function App() {
     <div className="container">
       {nextQuestion === 10 ? (
         <Correct
-          text={`Correct answers:${isTrue.correct}`}
+          text={"Correct answers:"}
+          number={isTrue.correct}
           send={() => {
             window.location.reload();
           }}
@@ -82,6 +88,7 @@ export default function App() {
           myNextQuestion={myNextQuestion}
           myBeforeQuestion={myBeforeQuestion}
           isTrue={isTrue}
+          selectedOption={selectedOption}
         />
       )}
     </div>
