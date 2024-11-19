@@ -1,4 +1,4 @@
-export default function myFormComponent(props) {
+export default function MyFormComponent(props) {
   if (props.myQuestions?.length === 0) {
     return <p>Loading questions...</p>;
   }
