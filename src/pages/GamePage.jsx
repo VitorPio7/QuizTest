@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import he from "he";
 import MyFormComponent from "../component/MyFormComponent";
 import Correct from "./Correct";
 import { useLocation } from "react-router-dom";
+import "./styles/GamePage.css";
 
 export default function GamePage() {
   const [myQuestions, setMyQuestions] = useState([]);
@@ -17,6 +17,7 @@ export default function GamePage() {
     condition: false,
     tag: null,
     correct: 0,
+    class: "",
   });
   console.log(isTrue);
 
@@ -27,7 +28,7 @@ export default function GamePage() {
       )
       .then((response) => {
         const formattedQuestions = response.data.results?.map((el) => ({
-          question: he.decode(el.question),
+          question: el.question,
           options: [...el.incorrect_answers, el.correct_answer].sort(
             () => Math.random() - 0.5
           ),
@@ -54,21 +55,22 @@ export default function GamePage() {
   }
 
   const handleDropdownChange = (event) => {
-    event.preventDefault();
-    setSelectedOption(event.target.value);
+    setSelectedOption(event);
   };
   function changeBoolean() {
     selectedOption === myQuestions[nextQuestion]?.correctAnswer
       ? setisTrue((prevValue) => ({
           ...prevValue,
           condition: true,
-          tag: <p>Correct Answer</p>,
+          tag: <p className="correctAnswer">Correct Answer</p>,
+          class: "trueClass",
           correct: prevValue.correct + 1,
         }))
       : setisTrue((prevValue) => ({
           ...prevValue,
           condition: false,
-          tag: <p>Wrong Answer</p>,
+          class: "falseClass",
+          tag: <p className="wrongAnswer">Wrong Answer</p>,
         }));
   }
 

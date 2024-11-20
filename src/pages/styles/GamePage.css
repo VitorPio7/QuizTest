@@ -1,0 +1,65 @@
+.containerAnswers {
+  align-items: center;
+}
+.containerAnswers p {
+  font-weight: 500;
+  font-size: 25px;
+  text-align: center;
+}
+input[type="radio"] {
+  display: none;
+}
+
+.radio-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.radio-button:hover {
+  background-color: #eaeaea;
+  border-color: #999;
+}
+
+/* Estilo quando selecionado */
+input[type="radio"]:checked + .radio-button {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+.questionLetter {
+  display: block;
+}
+.MyQuestion {
+  text-align: center;
+  max-width: 700px;
+  font-weight: 500;
+}
+.myForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.myForm button {
+  align-self: center;
+}
+.wrongAnswer {
+  color: #f94632;
+  font-weight: 800;
+}
+.correctAnswer {
+  color: #4caf50;
+}
+input[type="radio"]:checked + .trueClass {
+  background-color: #4caf50;
+}
+input[type="radio"]:checked + .falseClass {
+  background-color: #f94632;
+  border: #f94632;
+}

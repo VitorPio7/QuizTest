@@ -1,0 +1,42 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+  position: relative;
+  background: url(backGroundHome.svg), #ffffff;
+  background-size: cover;
+}
+.class--home p {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 140px;
+}
+.class--home form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+input {
+  display: block;
+  width: 584px;
+  border: gray;
+  height: 38px;
+}
+select {
+  display: block;
+  width: 584px;
+  border: gray;
+  height: 48px;
+}
+
+input[type="text"] {
+  padding: 5px;
+}
