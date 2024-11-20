@@ -4,7 +4,7 @@ export default function MyFormComponent(props) {
   if (props.myQuestions?.length === 0) {
     return <p>Loading questions...</p>;
   }
-  console.log(props.isTrue.class);
+  console.log("this:", props.isTrue.class);
 
   return (
     <div className="containerAnswers">
