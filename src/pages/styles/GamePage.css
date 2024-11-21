@@ -63,3 +63,39 @@ input[type="radio"]:checked + .falseClass {
   background-color: #f94632;
   border: #f94632;
 }
+.container2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.ptext2 {
+  font-family: "Quicksand";
+  font-weight: 600;
+  font-size: 300px;
+  color: white;
+  text-shadow: #000 1px 0 10px;
+}
+.ptext1 {
+  font-family: "Quicksand";
+  font-weight: bold;
+  font-size: 48px;
+}
+@media only screen and (max-width: 767px) {
+  .MyQuestion {
+    max-width: 350px;
+  }
+  .containerAnswers p {
+    font-size: 20px;
+  }
+  .nextButton {
+    background-color: #f94632;
+  }
+  .ptext1 {
+    font-size: 26px;
+  }
+  .ptext2 {
+    font-size: 228px;
+  }
+}

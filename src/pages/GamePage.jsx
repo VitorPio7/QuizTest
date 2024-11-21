@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MyFormComponent from "../component/MyFormComponent";
 import Correct from "./Correct";
+import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "./styles/GamePage.css";
 
@@ -10,7 +11,7 @@ export default function GamePage() {
   const [selectedOption, setSelectedOption] = useState("");
   const [nextQuestion, setNextQuestion] = useState(0);
   const location = useLocation();
-
+  const navigate = useNavigate();
   const formData = location.state || {};
 
   const [isTrue, setisTrue] = useState({
@@ -82,11 +83,13 @@ export default function GamePage() {
         <Correct
           text={"Correct answers:"}
           number={isTrue.correct}
+          totalQuestion={myQuestions.length}
+          text2={"Would you like to play again?"}
           send={() => {
-            window.location.reload();
+            navigate("/");
           }}
         >
-          Click here
+          Start again
         </Correct>
       ) : (
         <MyFormComponent

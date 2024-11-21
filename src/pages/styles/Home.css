@@ -40,3 +40,14 @@ select {
 input[type="text"] {
   padding: 5px;
 }
+@media only screen and (max-width: 767px) {
+  .class--home p {
+    font-size: 70px;
+  }
+  input {
+    width: 310px;
+  }
+  select {
+    width: 310px;
+  }
+}
