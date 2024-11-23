@@ -3,3 +3,4 @@
 ![BachQuizz3](https://github.com/user-attachments/assets/d5623251-d700-4e42-999b-92571b1808b4)
 https://github.com/user-attachments/assets/df342445-2085-4980-8775-1242a5bd41d1
 
+https://www.linkedin.com/in/vitor-pio-vieira-8ba672197/
