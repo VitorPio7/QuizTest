@@ -1,0 +1,128 @@
+.containerAnswers {
+  align-items: center;
+}
+.containerAnswers p {
+  font-weight: 500;
+  font-size: 25px;
+  text-align: center;
+}
+.MyQuestion {
+  text-align: center;
+  max-width: 700px;
+  font-weight: 500;
+}
+.myForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.myForm button {
+  align-self: center;
+}
+.button_start {
+  align-items: center;
+  width: 200px;
+  appearance: none;
+  background-color: #facc43;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,
+    rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #facc43 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 20px;
+}
+.button_start:focus {
+  box-shadow: #facc43 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #facc43 0 -3px 0 inset;
+}
+
+.button_start:hover {
+  box-shadow: rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.2) 0 7px 13px -3px, #facc43 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button_start:active {
+  box-shadow: #facc43 0 3px 7px inset;
+  transform: translateY(2px);
+}
+.divButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.divButtons button {
+  width: 150px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 20px;
+  appearance: none;
+  padding: 8px;
+  border: gray;
+}
+.nextButton {
+  background-color: #2cbf8b;
+}
+.beforeButton {
+  background-color: #f94632;
+}
+
+/* Estilo quando selecionado */
+input[type="radio"] {
+  display: none;
+}
+
+.radio_button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.radio_button:hover {
+  background-color: #eaeaea;
+  border-color: #999;
+}
+
+input[type="radio"]:checked + .radio_button {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+.questionLetter {
+  display: block;
+}
+input[type="radio"]:checked + .trueClass {
+  background-color: #4caf50;
+}
+input[type="radio"]:checked + .falseClass {
+  background-color: #f94632;
+  border: #f94632;
+}

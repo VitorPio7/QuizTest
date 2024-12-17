@@ -6,8 +6,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/GamePage" element={<GamePage />} />
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="GamePage" element={<GamePage />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -4,7 +4,7 @@ import MyFormComponent from "../component/MyFormComponent";
 import Correct from "./Correct";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import "./styles/GamePage.css";
+import style from "./styles/GamePage.module.css";
 
 export default function GamePage() {
   const [myQuestions, setMyQuestions] = useState([]);
@@ -78,7 +78,7 @@ export default function GamePage() {
   /*mudar para radio */
 
   return (
-    <div className="container">
+    <div className={style.containerbody}>
       {nextQuestion === myQuestions.length ? (
         <Correct
           text={"Correct answers:"}

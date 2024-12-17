@@ -1,18 +1,21 @@
 import he from "he";
+import styles from "./styles/MyForm.module.css";
+
 export default function MyFormComponent(props) {
   let myArrayOption = ["A", "B", "C", "D"];
+
   if (props.myQuestions?.length === 0) {
     return <p>Loading questions...</p>;
   }
-  console.log("this:", props.isTrue.class);
-
+  console.log("this:");
+  let changeClass = props.isTrue.class;
   return (
-    <div className="containerAnswers">
+    <div className={styles.containerAnswers}>
       <p>
         Question {props.nextQuestion + 1}/{props.myQuestions?.length}
       </p>
-      <form className="myForm" onSubmit={(e) => e.preventDefault()}>
-        <p className="MyQuestion">
+      <form className={styles.myForm} onSubmit={(e) => e.preventDefault()}>
+        <p className={styles.MyQuestion}>
           {he.decode(props.myQuestions[props.nextQuestion]?.question)}
         </p>
         <div>
@@ -25,9 +28,9 @@ export default function MyFormComponent(props) {
                 checked={props.selectedOption === el}
                 onChange={() => props.handleDropdownChange(el)}
               />
-              <div className={`radio-button ${props.isTrue.class}`}>
+              <div className={`${styles.radio_button} ${styles[changeClass]}`}>
                 {" "}
-                <span className="questionLetter">
+                <span className={styles.questionLetter}>
                   {myArrayOption[index]}
                 </span>{" "}
                 {he.decode(el)}
@@ -37,18 +40,21 @@ export default function MyFormComponent(props) {
         </div>
         <button
           type="submit"
-          className="button-start"
+          className={styles.button_start}
           onClick={props.changeBoolean}
         >
           Send
         </button>
       </form>
-      <div className="divButtons">
-        <button onClick={props.myNextQuestion} className="nextButton">
+      <div className={styles.divButtons}>
+        <button onClick={props.myNextQuestion} className={styles.nextButton}>
           Next
         </button>
         {props.nextQuestion > 0 && (
-          <button onClick={props.myBeforeQuestion} className="beforeButton">
+          <button
+            onClick={props.myBeforeQuestion}
+            className={styles.beforeButton}
+          >
             Before
           </button>
         )}

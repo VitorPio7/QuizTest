@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Form from "../component/Form";
 import axios from "axios";
-import Button from "../component/Button";
+
 import { useNavigate } from "react-router-dom";
-import "./styles/Home.css";
+import styles from "./styles/Home.module.css";
 
 export default function Home() {
   let [myDatas, setMyDatas] = useState([]);
@@ -35,40 +35,44 @@ export default function Home() {
   }
 
   return (
-    <div className="class--home">
-      <p>BachQuizz</p>
-      <Form onSubmit={handleSubmit}>
-        <label>
-          Number of questions:
-          <input
-            type="text"
-            name="number"
-            value={formData.number}
-            onChange={handleChange}
-            required
-            min="1"
-            max="50"
-          />
-        </label>
-        <label>
-          Select category
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            {myDatas.trivia_categories?.map((el) => {
-              return (
-                <option key={el.id} value={el.id}>
-                  {el.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <Button nameClass={"start"}>Start</Button>
-      </Form>
+    <div className={styles.classBody}>
+      <div className={styles.classHome}>
+        <p>BachQuizz</p>
+        <Form onSubmit={handleSubmit}>
+          <label>
+            Number of questions:
+            <input
+              type="text"
+              name="number"
+              value={formData.number}
+              onChange={handleChange}
+              required
+              min="1"
+              max="50"
+            />
+          </label>
+          <label>
+            Select category
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              {myDatas.trivia_categories?.map((el) => {
+                return (
+                  <option key={el.id} value={el.id}>
+                    {el.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+          <button className={styles.button_start} role="button">
+            Start
+          </button>
+        </Form>
+      </div>
     </div>
   );
 }
