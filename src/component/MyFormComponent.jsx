@@ -1,14 +1,17 @@
 import he from "he";
 import styles from "./styles/MyForm.module.css";
-import { useState } from "react";
+
 export default function MyFormComponent(props) {
   let myArrayOption = ["A", "B", "C", "D"];
-  let [change, setChange] = useState(false);
+
   if (props.myQuestions?.length === 0) {
     return <p>Loading questions...</p>;
   }
   console.log("this:");
   let changeClass = props.isTrue.class;
+  if (changeClass === null) {
+    changeClass = "button_blue";
+  }
   return (
     <div className={styles.containerAnswers}>
       <p>
@@ -31,11 +34,7 @@ export default function MyFormComponent(props) {
                 checked={props.selectedOption === el}
                 onChange={() => props.handleDropdownChange(el)}
               />
-              <div
-                className={`${styles.radio_button} ${styles[changeClass]} ${
-                  change ? styles.button_blue : null
-                }`}
-              >
+              <div className={`${styles.radio_button} ${styles[changeClass]} `}>
                 {" "}
                 <span className={styles.questionLetter}>
                   {myArrayOption[index]}

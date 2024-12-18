@@ -105,18 +105,17 @@ input[type="radio"] {
   text-align: center;
   transition: all 0.3s;
 }
+.radio_button {
+}
 input[type="radio"]:checked {
   background-color: 77cdff;
 }
-.radio_button:hover {
-  background-color: #77cdff;
-  border-color: #999;
-}
-.button_blue {
-  background-color: #77cdff;
-}
+
 .questionLetter {
   display: block;
+}
+input[type="radio"]:checked + .button_blue {
+  background-color: #77cdff;
 }
 input[type="radio"]:checked + .trueClass {
   background-color: #4caf50;

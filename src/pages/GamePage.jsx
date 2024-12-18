@@ -45,13 +45,14 @@ export default function GamePage() {
         ...prevValue,
         condition: false,
         tag: null,
+        class: null,
       };
     });
   }
   function myBeforeQuestion() {
     setNextQuestion((prevValue) => prevValue - 1);
     setisTrue((prevValue) => {
-      return { ...prevValue, condition: false, tag: null };
+      return { ...prevValue, condition: false, tag: null, class: null };
     });
   }
 
@@ -73,13 +74,6 @@ export default function GamePage() {
         condition: false,
         class: "falseClass",
         tag: <p className="wrongAnswer">Wrong Answer</p>,
-      }));
-    } else if (selectedOption === null) {
-      setisTrue((prevValue) => ({
-        ...prevValue,
-        condition: false,
-        class: "button_blue",
-        tag: null,
       }));
     }
   }

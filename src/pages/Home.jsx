@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Form from "../component/Form";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
 import styles from "./styles/Home.module.css";
 
