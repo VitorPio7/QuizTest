@@ -1,9 +1,9 @@
 import he from "he";
 import styles from "./styles/MyForm.module.css";
-
+import { useState } from "react";
 export default function MyFormComponent(props) {
   let myArrayOption = ["A", "B", "C", "D"];
-
+  let [change, setChange] = useState(false);
   if (props.myQuestions?.length === 0) {
     return <p>Loading questions...</p>;
   }
@@ -20,7 +20,10 @@ export default function MyFormComponent(props) {
         </p>
         <div>
           {props.myQuestions[props.nextQuestion]?.options.map((el, index) => (
-            <label key={index} className={`mylabels`}>
+            <label
+              key={index}
+              onClick={() => setChange((prevValue) => !prevValue)}
+            >
               <input
                 type="radio"
                 name="selectedOption"
@@ -28,7 +31,11 @@ export default function MyFormComponent(props) {
                 checked={props.selectedOption === el}
                 onChange={() => props.handleDropdownChange(el)}
               />
-              <div className={`${styles.radio_button} ${styles[changeClass]}`}>
+              <div
+                className={`${styles.radio_button} ${styles[changeClass]} ${
+                  change ? styles.button_blue : null
+                }`}
+              >
                 {" "}
                 <span className={styles.questionLetter}>
                   {myArrayOption[index]}

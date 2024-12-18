@@ -7,6 +7,10 @@
   background: url(backGroundQuestion.svg), #ffffff;
   background-size: cover;
 }
+p {
+  color: white;
+  text-shadow: black 0 2px 4px;
+}
 .button_start {
   align-items: center;
   width: 200px;
@@ -17,7 +21,7 @@
   box-shadow: rgba(45, 35, 66, 0.2) 0 2px 4px,
     rgba(45, 35, 66, 0.15) 0 7px 13px -3px, #facc43 0 -3px 0 inset;
   box-sizing: border-box;
-  color: #000000;
+  color: white;
   cursor: pointer;
   display: inline-flex;
   height: 48px;

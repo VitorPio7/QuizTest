@@ -18,7 +18,7 @@ export default function GamePage() {
     condition: false,
     tag: null,
     correct: 0,
-    class: "",
+    class: null,
   });
   console.log(isTrue);
 
@@ -59,20 +59,29 @@ export default function GamePage() {
     setSelectedOption(event);
   };
   function changeBoolean() {
-    selectedOption === myQuestions[nextQuestion]?.correctAnswer
-      ? setisTrue((prevValue) => ({
-          ...prevValue,
-          condition: true,
-          tag: <p className="correctAnswer">Correct Answer</p>,
-          class: "trueClass",
-          correct: prevValue.correct + 1,
-        }))
-      : setisTrue((prevValue) => ({
-          ...prevValue,
-          condition: false,
-          class: "falseClass",
-          tag: <p className="wrongAnswer">Wrong Answer</p>,
-        }));
+    if (selectedOption === myQuestions[nextQuestion]?.correctAnswer) {
+      setisTrue((prevValue) => ({
+        ...prevValue,
+        condition: true,
+        tag: <p className="correctAnswer">Correct Answer</p>,
+        class: "trueClass",
+        correct: prevValue.correct + 1,
+      }));
+    } else if (selectedOption !== myQuestions[nextQuestion]?.correctAnswer) {
+      setisTrue((prevValue) => ({
+        ...prevValue,
+        condition: false,
+        class: "falseClass",
+        tag: <p className="wrongAnswer">Wrong Answer</p>,
+      }));
+    } else if (selectedOption === null) {
+      setisTrue((prevValue) => ({
+        ...prevValue,
+        condition: false,
+        class: "button_blue",
+        tag: null,
+      }));
+    }
   }
 
   /*mudar para radio */
