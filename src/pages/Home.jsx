@@ -13,9 +13,23 @@ export default function Home() {
   });
 
   useEffect(() => {
-    axios.get("https://opentdb.com/api_category.php").then((response) => {
-      setMyDatas(response.data);
-    });
+    async function getCategories() {
+      try {
+        const response = await axios.get(
+          "https://opentdb.com/api_category.php"
+        );
+        if (response.status !== 200) {
+          throw new Error(
+            "There was an error fetching the data",
+            response.status
+          );
+        }
+        setMyDatas(response.data);
+      } catch (error) {
+        throw new Error("There was an error fetching the data", error);
+      }
+    }
+    getCategories();
   }, []);
 
   const navigate = useNavigate();

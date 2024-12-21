@@ -23,11 +23,14 @@ export default function GamePage() {
   console.log(isTrue);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://opentdb.com/api.php?amount=${formData.number}&category=${formData.category}`
-      )
-      .then((response) => {
+    async function getValue() {
+      try {
+        let response = await axios.get(
+          `https://opentdb.com/api.php?amount=${formData.number}&category=${formData.category}`
+        );
+        if (response.status !== 200) {
+          throw new Error("There was an error", response.status);
+        }
         const formattedQuestions = response.data.results?.map((el) => ({
           question: el.question,
           options: [...el.incorrect_answers, el.correct_answer].sort(
@@ -36,7 +39,11 @@ export default function GamePage() {
           correctAnswer: el.correct_answer,
         }));
         setMyQuestions(formattedQuestions);
-      });
+      } catch (error) {
+        throw new Error("There was an error fetching the data", error);
+      }
+    }
+    getValue();
   }, []);
   function myNextQuestion() {
     setNextQuestion((prevValue) => prevValue + 1);
